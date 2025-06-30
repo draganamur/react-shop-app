@@ -1,0 +1,261 @@
+.productPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 100%;
+
+    overflow: visible;
+    &.red {
+        background-color: var(--red);
+    }
+    &.dark_blue {
+        background-color: var(--dark_blue);
+    }
+    &.light_gray {
+        background-color: #eceff1;
+    }
+    header {
+        position: sticky;
+        top: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 20%;
+
+        padding: 15px;
+
+        background-color: #e5e7eb;
+
+        color: #111827;
+        font-size: 48px;
+        font-weight: bold;
+        font-family: "Montserrat";
+        &.light_gray {
+            background-color: var(--light_gray);
+            .title {
+                color: white;
+            }
+            .subtitle {
+                color: white;
+            }
+        }
+        &.red {
+            background-color: #f5f5f5;
+        }
+        .subtitle {
+            width: 100%;
+
+            font-size: 13px;
+            font-style: italic;
+        }
+        .title {
+            width: 100%;
+            span {
+                color: #ef4444;
+            }
+            .cartIcon {
+                position: absolute;
+                right: 20px;
+                top: 0px;
+
+                overflow: visible;
+            }
+            button {
+                position: relative;
+
+                width: 100%;
+                height: 100%;
+
+                font-size: 30px;
+
+                background: transparent;
+                border: none;
+            }
+            .badge {
+                position: absolute;
+                top: 5px;
+                right: -15px;
+
+                padding: 4px 6px;
+
+                background-color: #ef4444;
+
+                border-radius: 50%;
+
+                font-size: 12px;
+                color: white;
+                font-weight: bold;
+
+                animation: none;
+            }
+            .bounce {
+                animation: bounce 0.4s ease;
+            }
+        }
+    }
+    .product {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-around;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+
+        width: 100%;
+        height: 80%;
+
+        padding: 10px;
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: #4d4d4d;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 10px;
+        }
+
+        .productCard {
+            position: relative;
+
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            flex-direction: column;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+
+            max-width: 300px;
+            height: 400px;
+
+            margin: 10px 0px;
+            padding: 10px;
+
+            border-radius: 30px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+            background-color: #ffffff;
+
+            outline: none;
+            color: var(--gray);
+            .productImage {
+                width: 60%;
+                height: 50%;
+
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .productName {
+                width: 100%;
+
+                text-align: center;
+                text-wrap: wrap;
+                font-weight: bold;
+                font-variant: all-petite-caps;
+            }
+            .productPrice {
+                color: #22c55e;
+                font-weight: bold;
+            }
+            .productDetails {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                width: 100%;
+
+                padding: 0px 20px;
+
+                font-size: 13px;
+                .productDescription {
+                    max-width: 60%;
+
+                    font-style: italic;
+                }
+                .detailsButton {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+
+                    padding: 8px;
+
+                    border-radius: 10px;
+                    border-width: 0px;
+
+                    background-image: linear-gradient(#5f88f0d9, #002991d9);
+
+                    cursor: pointer;
+
+                    &:hover {
+                        background-image: -webkit-gradient(
+                            linear,
+                            left top,
+                            left bottom,
+                            color-stop(1%, #83838588),
+                            color-stop(#1b1b337d),
+                            to(#1313387d)
+                        );
+                        background-image: linear-gradient(#83838588 1%, #1b1b337d, #1313387d);
+                    }
+                }
+            }
+            .addToCart {
+                position: absolute;
+                bottom: 0;
+
+                height: 30px;
+                width: 70%;
+
+                padding: 5px;
+
+                border-radius: 10px 10px 0px 0px;
+                border-bottom: 0;
+
+                background: #facc15;
+
+                font-weight: bold;
+
+                cursor: pointer;
+
+                &:hover {
+                    background: #eab308;
+                }
+            }
+        }
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.3);
+    }
+    60% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
