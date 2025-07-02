@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type UserType = {
-  username: string;
-  password?: string;
-};
+import {
+  REACT_APP_DEFAULT_USER,
+  REACT_APP_DEFAULT_PASS,
+} from "../../enviroments";
+import { UserType, AuthState } from "../../interfaces";
+import {
+  removeAuthFromLocalStorage,
+  setAuthToLocalStorage,
+} from "../../data/localStorage";
+import { passwordValidation } from "../../utils/authentication";
 
 const testUser: UserType = {
-  username: "admin",
-  password: "Admin123$",
-};
-
-type AuthState = {
-  isAuthenticated: boolean;
-  user: UserType | null;
-  error: string | null;
+  username: REACT_APP_DEFAULT_USER,
+  password: REACT_APP_DEFAULT_PASS,
 };
 
 const initialAuthState: AuthState = {
@@ -32,20 +31,9 @@ const authSlice = createSlice({
     ) {
       const { username, password } = action.payload;
 
-      if (!/[A-Z]/.test(password)) {
-        state.error = "Password must contain at least one uppercase letter";
-        return;
-      }
-      if (!/[a-z]/.test(password)) {
-        state.error = "Password must contain at least one lowercase letter";
-        return;
-      }
-      if (!/\d/.test(password)) {
-        state.error = "Password must contain at least one digit";
-        return;
-      }
-      if (!/[^a-zA-Z0-9]/.test(password)) {
-        state.error = "Password must contain at least one special character";
+      const passwordError = passwordValidation(password);
+      if (passwordError) {
+        state.error = passwordError;
         return;
       }
 
@@ -53,7 +41,7 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
         state.user = { username };
         state.error = null;
-        localStorage.setItem("user", username);
+        setAuthToLocalStorage({ token: "test_token", user: username });
       } else {
         state.error = "Invalid username or password";
       }
@@ -62,6 +50,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.error = null;
+      removeAuthFromLocalStorage();
     },
     restoreSession: (state, action: PayloadAction<{ username: string }>) => {
       state.isAuthenticated = true;
@@ -71,5 +60,5 @@ const authSlice = createSlice({
   },
 });
 
-export const authActions = authSlice.actions;
+export const { login, logout, restoreSession } = authSlice.actions;
 export default authSlice.reducer;

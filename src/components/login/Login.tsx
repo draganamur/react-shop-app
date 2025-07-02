@@ -1,11 +1,12 @@
 import classes from "./Login.module.scss";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppDispatch";
-import { authActions } from "../../store/slices/auth-slice";
+import { login } from "../../store/slices/auth-slice";
 import Button from "../button/Button";
 
 const Login = () => {
   const dispatch = useAppDispatch();
+
   const error = useAppSelector((state) => state.auth.error);
 
   const [username, setUsername] = useState("");
@@ -13,7 +14,7 @@ const Login = () => {
 
   const loginHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(authActions.login({ username, password }));
+    dispatch(login({ username, password }));
   };
 
   return (

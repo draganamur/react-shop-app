@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-interface Config {
-  designVersion: number;
-}
+import { REACT_APP_DEFAULT_DESIGN } from "../../enviroments";
+import { Config } from "../../interfaces";
+
 const initialState: Config = {
-  designVersion: 3,
+  designVersion: REACT_APP_DEFAULT_DESIGN,
+  hasLostInternetConnection: false,
 };
+
 export const configSlice = createSlice({
   name: "config",
   initialState,
   reducers: {
+    setHasLostInternetConnection: (state, action) => {
+      state.hasLostInternetConnection = action.payload;
+    },
     setDesignVersion: (state, action) => {
       state.designVersion = action.payload;
     },
   },
 });
 
-export const configActions = configSlice.actions;
+export const { setHasLostInternetConnection, setDesignVersion } =
+  configSlice.actions;
 export default configSlice.reducer;

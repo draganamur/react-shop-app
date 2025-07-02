@@ -3,15 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../hooks/useAppDispatch";
 import React, { useEffect, useState } from "react";
 import { CartProps } from "../../interfaces/index";
+import { API_ROUTES } from "../../utils/constants";
 
 const CartButton: React.FC<CartProps> = ({ className }) => {
   const numberOfItems = useAppSelector((state) => state.cart.totalQuantity);
+
   const navigate = useNavigate();
-  const goToShop = () => {
-    navigate(`/cart`, { replace: true });
-  };
 
   const [animate, setAnimate] = useState(false);
+
+  const goToShop = () => {
+    navigate(API_ROUTES.CART, { replace: true });
+  };
 
   useEffect(() => {
     if (numberOfItems === 0) return;

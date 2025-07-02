@@ -5,3 +5,7 @@ export enum DesignVersion {
   GREEN = 4,
   PURPLE = 5,
 }
+
+export enum StatusCode {
+  UNAUTHORIZED = 401,
+}

@@ -2,19 +2,21 @@ import React from "react";
 import Button from "../button/Button";
 import classes from "./Products.module.scss";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { cartActions } from "../../store/slices/cart-slice";
+import { setSelectedItem, addItemTocart } from "../../store/slices/cart-slice";
 import { useNavigate } from "react-router-dom";
 import { ProductCardProps } from "../../interfaces/index";
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const handleShowDetails = () => {
-    dispatch(cartActions.setSelectedItem(product));
+    dispatch(setSelectedItem(product));
     navigate(`${product.id}`);
   };
+
   const addItemHandler = () => {
     dispatch(
-      cartActions.addItemTocart({
+      addItemTocart({
         title: product.title,
         price: product.price,
         id: product.id,

@@ -1,3 +1,21 @@
+import { DesignVersion } from "../enums";
+
+export interface UserType {
+  username: string;
+  password?: string;
+}
+
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: UserType | null;
+  error: string | null;
+}
+
+export interface Config {
+  designVersion: DesignVersion;
+  hasLostInternetConnection: boolean;
+}
+
 export interface CartProps {
   className?: string;
 }

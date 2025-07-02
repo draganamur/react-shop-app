@@ -1,20 +1,18 @@
+import { getDesign } from "../../utils";
 import { useAppSelector } from "../../hooks/useAppDispatch";
 import CartItem from "./CartItem";
 import classes from "./Cart.module.scss";
-import emptyCart from "../../assets/images/cart.png";
 import Button from "../button/Button";
-import { useNavigate } from "react-router-dom";
-import { getDesign } from "../../utils";
+import emptyCart from "../../assets/images/cart.png";
+import { useBackToShop } from "../../hooks/useBackToShop";
 
 const Cart = () => {
   const cartItems = useAppSelector((state) => state.cart.items);
   const numberOfItems = useAppSelector((state) => state.cart.totalQuantity);
   const totalPrice = useAppSelector((state) => state.cart.total);
-  const navigate = useNavigate();
-  const backToShop = () => {
-    navigate("/products", { replace: true });
-  };
   const designVersion = useAppSelector((state) => state.config.designVersion);
+
+  const backToShop = useBackToShop();
 
   return (
     <div className={classes.cart}>

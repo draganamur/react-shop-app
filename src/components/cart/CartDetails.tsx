@@ -2,25 +2,28 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useAppDispatch";
 import classes from "./CartDetails.module.scss";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
-import { cartActions } from "../../store/slices/cart-slice";
+import { addItemTocart } from "../../store/slices/cart-slice";
+import { API_ROUTES } from "../../utils/constants";
+import { useBackToShop } from "../../hooks/useBackToShop";
 
 const CartDetails = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const product = useAppSelector((state) => state.cart.selectedItem);
-  const backToShop = () => {
-    navigate(`/products`, { replace: true });
-  };
+
+  const backToShop = useBackToShop();
+
   const addItemToCart = () => {
     dispatch(
-      cartActions.addItemTocart({
+      addItemTocart({
         title: product.title,
         price: product.price,
         image: product.image,
         id: product.id,
       })
     );
-    navigate("/cart", { replace: true });
+    navigate(API_ROUTES.CART, { replace: true });
   };
   return (
     <div className={classes.cart}>

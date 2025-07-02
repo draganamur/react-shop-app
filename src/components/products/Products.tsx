@@ -4,30 +4,17 @@ import classes from "./Products.module.scss";
 import CartButton from "../cart/CartButton";
 import { useAppSelector } from "../../hooks/useAppDispatch";
 import { getDesign } from "../../utils";
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-};
+import { Product } from "../../interfaces";
+import { fetchProducts } from "../../services/ApiConsumer";
 
 const Products = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-      });
-  }, []);
   const designVersion = useAppSelector((state) => state.config.designVersion);
+
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetchProducts().then(setProducts).catch(console.error);
+  }, []);
 
   return (
     <div

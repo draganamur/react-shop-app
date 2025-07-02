@@ -1,6 +1,9 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppDispatch";
-import { cartActions } from "../../store/slices/cart-slice";
+import {
+  removeItemFromCart,
+  addItemTocart,
+} from "../../store/slices/cart-slice";
 import classes from "./Cart.module.scss";
 import { CartItemProps } from "../../interfaces/index";
 import { getDesign } from "../../utils";
@@ -8,16 +11,18 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const designVersion = useAppSelector((state) => state.config.designVersion);
 
   const dispatch = useAppDispatch();
+
   const removeItemHandler = () => {
     dispatch(
-      cartActions.removeItemFromCart({
+      removeItemFromCart({
         id: item.id,
       })
     );
   };
+
   const addItemHandler = () => {
     dispatch(
-      cartActions.addItemTocart({
+      addItemTocart({
         id: item.id,
         title: item.title,
         price: item.price,
